@@ -1,0 +1,63 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+env:
+  DENO_DIR: ${{ env.HOME }}/.deno_cache
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        deno: ['v1.x', 'canary']
+        os:
+          - macos-latest
+          - ubuntu-latest
+
+    timeout-minutes: 5
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: 🏴‍☠️ Checkout code repository
+        uses: actions/checkout@v3
+
+      - name: 📦 Cache Deno dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.DENO_DIR }}
+          key: ${{ secrets.CACHE_VERSION }}-${{ hashFiles('lock.json') }}-${{ matrix.deno }}-${{ matrix.os }}
+
+      - name: 🦕 Setup deno
+        uses: denoland/setup-deno@v1.0.0
+        with:
+          deno-version: ${{ matrix.deno }}
+
+      - name: 🔒 Lock cache
+        run: deno task lock
+        shell: 'bash'
+
+      - name: 🩺 Check formatting
+        if: startsWith(matrix.os, 'ubuntu') && matrix.deno == 'canary'
+        uses: dprint/check@v2.0
+
+      - name: 👩‍⚕️ Lint deno files
+        if: startsWith(matrix.os, 'ubuntu') && matrix.deno == 'canary'
+        run: deno lint
+
+      - name: ✋ Typecheck cli
+        run: deno --unstable check ./cli.ts
+        shell: 'bash'
+
+      - name: ✋ Typecheck main entry
+        run: deno --unstable check ./mod.ts
+        shell: 'bash'
+
+      - name: ✅ Unit tests
+        run: deno task test

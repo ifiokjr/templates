@@ -1,0 +1,31 @@
+{
+  "tasks": {
+    "check": "deno task fix && deno task lint && deno task test && CI=true deno task lock",
+    "fix": "dprint fmt",
+    "lint": "deno lint",
+    "lock:update": "deno run --allow-run=deno --allow-read scripts/cache.ts",
+    "lock": "deno run --allow-run=deno --allow-env=CI --allow-read scripts/cache.ts --reload",
+    "test:coverage": "deno test --coverage=coverage --unstable -A",
+    "test:watch": "deno test --unstable -A --watch",
+    "test": "deno test --unstable -A"
+  },
+  "compilerOptions": {
+    "noUncheckedIndexedAccess": true
+  },
+  "lint": {
+    "files": {
+      "include": ["./"],
+      "exclude": [
+        "**/node_modules",
+        "**/*-lock.json",
+        "**/__fixtures__",
+        "**/__snapshots__"
+      ]
+    },
+    "rules": {
+      "tags": ["recommended"],
+      "include": [],
+      "exclude": ["ban-types"]
+    }
+  }
+}
