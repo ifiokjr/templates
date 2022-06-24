@@ -1,4 +1,4 @@
-import { defineTemplate } from "https://deno.land/x/scaffold@0.1.0/mod.ts";
+import { defineTemplate } from "https://deno.land/x/scaffold@0.1.1/mod.ts";
 
 export default defineTemplate({
   getPermissions: { run: ["git", "deno"] },
