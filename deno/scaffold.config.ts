@@ -8,17 +8,13 @@ export default defineTemplate({
         message: "Name",
         type: type.Input,
         name: "name",
-        hint: typeof initialVariables.name === "string"
-          ? initialVariables.name
-          : undefined,
+        default: initialVariables.name as string,
       },
       {
         message: "Description",
         type: type.Input,
         name: "description",
-        hint: typeof initialVariables.description === "string"
-          ? initialVariables.description
-          : undefined,
+        default: initialVariables.name as string,
       },
     ]);
 
