@@ -10,7 +10,7 @@ on:
       - main
 
 env:
-  DENO_DIR: ${{ env.HOME }}/.deno_cache
+  DENO_DIR: ../.deno_cache
 
 jobs:
   test:
@@ -32,7 +32,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.DENO_DIR }}
-          key: ${{ secrets.CACHE_VERSION }}-${{ hashFiles('lock.json') }}-${{ matrix.deno }}-${{ matrix.os }}
+          key: ${{ hashFiles('lock.json') }}-${{ matrix.deno }}-${{ matrix.os }}
 
       - name: 🦕 Setup
         uses: denoland/setup-deno@v1.0.0
