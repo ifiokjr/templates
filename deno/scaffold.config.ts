@@ -14,7 +14,7 @@ export default defineTemplate({
         message: "Description",
         type: type.Input,
         name: "description",
-        default: initialVariables.name as string,
+        default: initialVariables.description as string,
       },
     ]);
 
@@ -24,22 +24,31 @@ export default defineTemplate({
       ...answers,
     };
   },
-  getInstallCommand({ destination }) {
+  getInstallCommand({ destination, permissions }) {
     return async () => {
-      await Deno.run({
-        cmd: ["deno", "task", "lock"],
-        cwd: destination,
-      }).status();
+      if (permissions.run.includes("deno")) {
+        await Deno.run({
+          cmd: ["deno", "task", "lock:update"],
+          cwd: destination,
+        }).status();
+      }
 
-      await Deno.run({
-        cmd: ["git", "add", "."],
-        cwd: destination,
-      }).status();
+      if (permissions.run.includes("git")) {
+        await Deno.run({
+          cmd: ["git", "init"],
+          cwd: destination,
+        }).status();
 
-      await Deno.run({
-        cmd: ["git", "commit", "-m", '"feat: initial commit 🎉'],
-        cwd: destination,
-      }).status();
+        await Deno.run({
+          cmd: ["git", "add", "."],
+          cwd: destination,
+        }).status();
+
+        await Deno.run({
+          cmd: ["git", "commit", "-m", "feat: initial commit 🎉"],
+          cwd: destination,
+        }).status();
+      }
     };
   },
 });
