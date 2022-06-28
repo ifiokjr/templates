@@ -20,15 +20,13 @@ export default defineTemplate({
         message: "Twitter Username",
         type: type.Input,
         name: "twitter",
-        hint: "twitter_username",
-        default: initialVariables.user,
+        default: initialVariables.user ?? "twitter_username",
       },
       {
         message: "GitHub Username",
         type: type.Input,
         name: "github",
-        hint: "github_username",
-        default: initialVariables.user,
+        default: initialVariables.user ?? "github_username",
       },
       { message: "Description", type: type.Input, name: "description" },
       {
