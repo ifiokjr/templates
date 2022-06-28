@@ -7,7 +7,11 @@ blog({
   coverStyle: "avatar-rounded",
   author: "<%= it.author %>",
   background: "#f9f9f9",
-
+  links: [
+    { title: "Email", url: "mailto:<%= it.email %>" },
+    { title: "GitHub", url: "https://github.com/<%= it.github %>" },
+    { title: "Twitter", url: "https://twitter.com/<%= it.twitter %>" },
+  ],
   middlewares: [
     // If you want to set up Google Analytics, paste your GA key here.
     ga("<%= it.description %>"),

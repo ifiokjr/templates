@@ -16,6 +16,20 @@ export default defineTemplate({
         name: "email",
         default: initialVariables.email,
       },
+      {
+        message: "Twitter Username",
+        type: type.Input,
+        name: "twitter",
+        hint: "twitter_username",
+        default: initialVariables.user,
+      },
+      {
+        message: "GitHub Username",
+        type: type.Input,
+        name: "github",
+        hint: "github_username",
+        default: initialVariables.user,
+      },
       { message: "Description", type: type.Input, name: "description" },
       {
         message: "Google Analytics Key",
