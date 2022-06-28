@@ -5,16 +5,23 @@ export default defineTemplate({
   async getVariables({ prompt, type, initialVariables }) {
     const answers = await prompt([
       {
-        message: "Name",
+        message: "Author",
         type: type.Input,
-        name: "name",
-        default: initialVariables.name as string,
+        name: "author",
+        default: initialVariables.username,
       },
       {
-        message: "Description",
+        message: "Email",
         type: type.Input,
-        name: "description",
-        default: initialVariables.description as string,
+        name: "email",
+        default: initialVariables.email,
+      },
+      { message: "Description", type: type.Input, name: "description" },
+      {
+        message: "Google Analytics Key",
+        type: type.Input,
+        name: "analytics",
+        default: "UA-XXXXXXXX-X",
       },
     ]);
 

@@ -1,5 +1,5 @@
 {
-  "deno.enablePaths": ["deno", "tests"],
+  "deno.enablePaths": ["deno", "tests", "blog"],
   "[markdown]": {
     "editor.defaultFormatter": "dprint.dprint"
   },

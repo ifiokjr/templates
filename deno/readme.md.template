@@ -1,7 +1,7 @@
 # <%= it.name %>
 
 
-> <%= it.description %> | _created with [`scaffold`](https://github.com/ifiokjr/scaffold)_
+> <%= it.description %>
 
 ## Contributing
 
@@ -20,3 +20,5 @@ deno task check
 ```
 
 This will test, lint and check that formatting is correct.
+
+_created with [`scaffold`](https://github.com/ifiokjr/scaffold)_

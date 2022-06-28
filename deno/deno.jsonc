@@ -9,7 +9,8 @@
     "test:docs": "deno test --docs -A mod.ts readme.md",
     "test:snapshot": "deno test --unstable -A -- -u",
     "test:watch": "deno test --unstable -A --watch",
-    "test": "deno test --unstable -A"
+    "test": "deno test --unstable -A",
+    "update": "dprint config update && deno run -A 'https://deno.land/x/udd@0.5.0/main.ts' src/deps.ts scripts/deps.ts tests/deps.ts"
   },
   "compilerOptions": {
     "noUncheckedIndexedAccess": true
@@ -17,11 +18,9 @@
   "lint": {
     "files": {
       "include": ["./"],
-      "exclude": [
-        "**/node_modules",
-        "**/*-lock.json",
-        "**/__fixtures__",
-        "**/__snapshots__"
+      "excludes": [
+        "**/fixtures",
+        "**/snapshots"
       ]
     },
     "rules": {

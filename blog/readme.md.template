@@ -1,0 +1,7 @@
+# <%= it.username %>'s Blog
+
+> <%= it.description %>
+
+Welcome to my blog!
+
+_created with [`scaffold`](https://github.com/ifiokjr/scaffold)_

@@ -1,7 +1,8 @@
-import { assertEquals, describe, it } from './deps.ts';
+import { describe, it } from "./deps.ts";
+import { snapshot } from "./helpers.ts";
 
-describe('main', () => {
-  it('should test', () => {
-    assertEquals(1, 1);
+describe("main", () => {
+  it("should create snapshots", async (t) => {
+    await snapshot(t, { hello: "world" });
   });
 });
