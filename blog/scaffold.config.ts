@@ -1,7 +1,7 @@
 import { defineTemplate } from "https://deno.land/x/scaffold@0.3.0/mod.ts";
 
 export default defineTemplate({
-  getPermissions: { run: ["git", "deno"] },
+  getPermissions: { run: ["git"] },
   async getVariables({ prompt, type, initialVariables }) {
     const answers = await prompt([
       {
@@ -33,13 +33,6 @@ export default defineTemplate({
   },
   getInstallCommand({ destination, permissions }) {
     return async () => {
-      if (permissions.run.includes("deno")) {
-        await Deno.run({
-          cmd: ["deno", "task", "lock:update"],
-          cwd: destination,
-        }).status();
-      }
-
       if (permissions.run.includes("git")) {
         await Deno.run({
           cmd: ["git", "init"],
