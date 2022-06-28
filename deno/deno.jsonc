@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "check": "deno task fix && deno task lint && deno task test && deno task test:docs && CI=true deno task lock",
+    "check": "deno task typecheck && deno task fix && deno task lint && deno task test && deno task test:docs && CI=true deno task lock",
     "fix": "dprint fmt",
     "lint": "deno lint",
     "lock:update": "deno run --allow-run=deno --allow-read scripts/cache.ts",
@@ -10,10 +10,12 @@
     "test:snapshot": "deno test --unstable -A -- -u",
     "test:watch": "deno test --unstable -A --watch",
     "test": "deno test --unstable -A",
+    "typecheck": "deno --unstable check ./mod.ts",
     "update": "dprint config update && deno run -A 'https://deno.land/x/udd@0.5.0/main.ts' src/deps.ts scripts/deps.ts tests/deps.ts"
   },
   "compilerOptions": {
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true
   },
   "lint": {
     "files": {

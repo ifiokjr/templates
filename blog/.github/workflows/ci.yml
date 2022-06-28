@@ -35,13 +35,7 @@ jobs:
           key: ${{ hashFiles('lock.json') }}-${{ matrix.deno }}-${{ matrix.os }}
 
       - name: 🦕 Setup
-        uses: denoland/setup-deno@v1.0.0
-        with:
-          deno-version: ${{ matrix.deno }}
-
-      - name: 🔒 Lock
-        run: deno task lock
-        shell: 'bash'
+        uses: denoland/setup-deno@v1
 
       - name: 🩺 Format
         if: startsWith(matrix.os, 'ubuntu') && matrix.deno == 'canary'
@@ -54,9 +48,3 @@ jobs:
       - name: 🩺 Typecheck
         run: deno task typecheck
         shell: bash
-
-      - name: ✅ Test
-        run: deno task test
-
-      - name: 📝 Docs
-        run: deno task test:docs
