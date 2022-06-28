@@ -1,4 +1,4 @@
-# <%= it.username %>'s Blog
+# <%= it.title %>
 
 > <%= it.description %>
 

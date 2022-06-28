@@ -1,0 +1,6 @@
+---
+title: First post!
+publish_date: <%= it.date %>
+---
+
+This is my first blog post!

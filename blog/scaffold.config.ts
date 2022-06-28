@@ -3,7 +3,9 @@ import { defineTemplate } from "https://deno.land/x/scaffold@0.3.0/mod.ts";
 export default defineTemplate({
   getPermissions: { run: ["git"] },
   async getVariables({ prompt, type, initialVariables }) {
+    const date = new Date();
     const answers = await prompt([
+      { message: "Blog Title", type: type.Input, name: "title" },
       {
         message: "Author",
         type: type.Input,
@@ -39,7 +41,8 @@ export default defineTemplate({
 
     return {
       ...initialVariables,
-      year: new Date().getUTCFullYear(),
+      year: date.getUTCFullYear(),
+      date: date.toISOString().split("T").at(0),
       ...answers,
     };
   },

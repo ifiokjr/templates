@@ -13,7 +13,7 @@
   "lint": {
     "files": {
       "include": ["./"],
-      "excludes": [
+      "exclude": [
         "**/fixtures",
         "**/snapshots"
       ]

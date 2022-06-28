@@ -14,8 +14,8 @@
   "toml": {},
   "includes": ["**/*.{ts,tsx,js,jsx,cjs,mjs,json,jsonc,md,toml,dockerfile}"],
   "excludes": [
-    "**/__fixtures__",
-    "**/__snapshots__"
+    "**/fixtures",
+    "**/snapshots"
   ],
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.69.5.wasm",
