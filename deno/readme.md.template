@@ -1,6 +1,5 @@
 # <%= it.name %>
 
-
 > <%= it.description %>
 
 ## Contributing
