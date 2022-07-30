@@ -1,5 +1,8 @@
 {
-  "deno.enablePaths": ["deno", "crates", "blog"],
+  "deno.enable": true,
+  "deno.unstable": true,
+  "deno.testing.enable": true,
+  "deno.lint": true,
   "[markdown]": {
     "editor.defaultFormatter": "dprint.dprint"
   },
@@ -22,6 +25,9 @@
     "editor.defaultFormatter": "dprint.dprint"
   },
   "[toml]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[rust]": {
     "editor.defaultFormatter": "dprint.dprint"
   }
 }
