@@ -1,14 +1,18 @@
-import { expandGlob, getLogger, parse } from "./deps.ts";
+import { getLogger, globber, parse } from "./deps.ts";
+import { getBase } from "./helpers.ts";
 
 const decoder = new TextDecoder();
 const log = getLogger();
 const deps: string[] = [];
 const args = parse(Deno.args, { boolean: ["reload"] });
-const cwd = new URL("..", import.meta.url).pathname;
-const iterator = expandGlob("**/deps.ts", { includeDirs: false });
+const entries = globber({
+  cwd: getBase(),
+  include: ["**/deps.ts", "**/deps/*.ts"],
+  excludeDirectories: true,
+});
 
-for await (const dep of iterator) {
-  deps.push(dep.path);
+for await (const entry of entries) {
+  deps.push(entry.relative);
 }
 
 async function update() {
@@ -17,7 +21,7 @@ async function update() {
   await Deno.run({
     cmd: ["deno", "cache", "--lock=lock.json", "--lock-write", ...deps],
     stdout: "piped",
-    cwd,
+    cwd: getBase(),
   }).output();
 }
 
@@ -28,7 +32,7 @@ async function load() {
     cmd: ["deno", "cache", "--lock=lock.json", "--reload", ...deps],
     stdout: "piped",
     stderr: "piped",
-    cwd,
+    cwd: getBase(),
   });
 
   const [status, _, stderr] = await Promise.all([
@@ -46,8 +50,7 @@ async function load() {
       await update();
     } else {
       log.critical(
-        "Error while reloading the cache.",
-        error.split("error: ")[1],
+        `Error while reloading the cache.\n${error.split("error: ")[1]}`,
       );
       Deno.exit(1);
     }
